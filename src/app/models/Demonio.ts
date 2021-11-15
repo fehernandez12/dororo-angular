@@ -10,6 +10,8 @@ export class Demonio{
   listaPeleas: Pelea[];
   parte: Parte;
   lugar: Lugar;
+  fechaCreacion: Date;
+  fechaDerrotado: Date;
   constructor(id: number, nombre: string, imagen: string,
     derrotado: boolean, fechaCreacion: Date, fechaDerrotado: Date,
     listaPeleas: Pelea[], parte: Parte, lugar:Lugar) {
@@ -20,5 +22,7 @@ export class Demonio{
     this.listaPeleas = listaPeleas;
     this.parte = parte;
     this.lugar = lugar;
+    this.fechaCreacion = fechaCreacion;
+    this.fechaDerrotado = fechaDerrotado;
   }
 }

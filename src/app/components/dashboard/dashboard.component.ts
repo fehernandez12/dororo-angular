@@ -53,25 +53,32 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.demonioService.getDemonios().subscribe(
       demonios => {
         this.demonios = demonios;
+        console.log(this.demonios);
       }
     );
     this.demonioService.getDerrotados().subscribe(
-      derrotados => this.derrotados = derrotados
+      derrotados => {
+        this.derrotados = derrotados;
+        console.log(this.derrotados);
+      }
     );
       this.demonioService.getInvictos().subscribe(
-      invictos => this.invictos = invictos
+        invictos => {
+          this.invictos = invictos;
+          console.log(this.invictos);
+          this.calculatePercentages();
+          this.generateChart(this.derrotados.length, this.invictos.length);
+        }
     );
-    this.generateChart(this.derrotados.length, this.invictos.length);
     this.lugarService.getLugares().subscribe(
       lugares => this.lugares = lugares
     );
-    this.calculatePercentages();
   }
 
   calculatePercentages() {
     let total = this.derrotados.length + this.invictos.length;
-    total === 0 ? this.porcentajeD = 0 : this.porcentajeD = this.derrotados.length / (total/100);
-    total === 0 ? this.porcentajeI = 0 : this.porcentajeI = this.invictos.length / (total/100);
+    total === 0 ? this.porcentajeD = 0 : this.porcentajeD = Math.round(this.derrotados.length / (total/100));
+    total === 0 ? this.porcentajeI = 0 : this.porcentajeI = Math.round(this.invictos.length / (total/100));
   }
 
   generateChart(derrotados:number, invictos:number) {

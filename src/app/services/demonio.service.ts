@@ -8,7 +8,7 @@ import { Demonio } from '../models/Demonio';
   providedIn: 'root'
 })
 export class DemonioService {
-  private urlEndPoint: string = 'https://dororo-api.herokuapp.com/api/demonios/';
+  private urlEndPoint: string = 'http://localhost:8081/api/demonios/';
 
   private header = new HttpHeaders(
     {

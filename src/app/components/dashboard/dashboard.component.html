@@ -61,13 +61,13 @@
             <div class="card shadow-none m-0">
               <div class="card-body text-center">
                 <i
-                  class="mdi mdi-emoticon-devil-outline text-muted"
+                  class="mdi mdi-puzzle-outline text-muted"
                   style="font-size: 24px"
                 ></i>
                 <h3>
-                  <span>{{ demonios.length }}</span>
+                  <span>{{ partes.length }}</span>
                 </h3>
-                <p class="text-muted font-15 mb-0">Demonios registrados</p>
+                <p class="text-muted font-15 mb-0">Partes</p>
               </div>
             </div>
           </div>
@@ -106,151 +106,49 @@
   <div class="col-lg-8">
     <div class="card">
       <div class="card-body">
-        <div class="dropdown float-right">
-          <a
-            href="#"
-            class="dropdown-toggle arrow-none card-drop"
-            data-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="mdi mdi-dots-vertical"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item"
-              >Weekly Report</a
-            >
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item"
-              >Monthly Report</a
-            >
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item">Action</a>
-            <!-- item-->
-            <a href="javascript:void(0);" class="dropdown-item">Settings</a>
-          </div>
-        </div>
-        <h4 class="header-title mb-3">Tasks</h4>
+        <h4 class="header-title mb-3">Demonios Recientes</h4>
 
-        <p><b>107</b> Tasks completed out of 195</p>
+        <p>
+          <b>{{ derrotados.length }}</b> demonios derrotados, de
+          {{ derrotados.length + invictos.length }}
+        </p>
 
         <div class="table-responsive">
           <table class="table table-centered table-nowrap table-hover mb-0">
             <tbody>
-              <tr>
+              <tr *ngFor="let item of demonios.slice(0, 4)">
                 <td>
                   <h5 class="font-14 my-1">
-                    <a href="javascript:void(0);" class="text-body"
-                      >Coffee detail page - Main Page</a
-                    >
+                    <a href="javascript:void(0);" class="text-body">{{
+                      item.nombre
+                    }}</a>
                   </h5>
-                  <span class="text-muted font-13">Due in 3 days</span>
+                  <span class="text-muted font-13">{{
+                    item.fechaCreacion
+                  }}</span>
                 </td>
                 <td>
-                  <span class="text-muted font-13">Status</span> <br />
-                  <span class="badge badge-warning-lighten">In-progress</span>
+                  <span class="text-muted font-13">Estado</span> <br />
+                  <span
+                    class="badge badge-danger-lighten"
+                    *ngIf="!item.derrotado; else elseblock"
+                    >No derrotado</span
+                  >
+                  <ng-template #elseblock>
+                    <span class="badge badge-success-lighten">Derrotado</span>
+                  </ng-template>
                 </td>
                 <td>
-                  <span class="text-muted font-13">Assigned to</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">Logan R. Cohn</h5>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Total time spend</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">3h 20min</h5>
-                </td>
-                <td class="table-action" style="width: 90px">
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-pencil"></i
-                  ></a>
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-delete"></i
-                  ></a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5 class="font-14 my-1">
-                    <a href="javascript:void(0);" class="text-body"
-                      >Drinking bottle graphics</a
-                    >
-                  </h5>
-                  <span class="text-muted font-13">Due in 27 days</span>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Status</span> <br />
-                  <span class="badge badge-danger-lighten">Outdated</span>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Assigned to</span>
+                  <span class="text-muted font-13">Parte</span>
                   <h5 class="font-14 mt-1 font-weight-normal">
-                    Jerry F. Powell
+                    La parte va aquí
                   </h5>
                 </td>
                 <td>
-                  <span class="text-muted font-13">Total time spend</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">12h 21min</h5>
-                </td>
-                <td class="table-action" style="width: 90px">
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-pencil"></i
-                  ></a>
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-delete"></i
-                  ></a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5 class="font-14 my-1">
-                    <a href="javascript:void(0);" class="text-body"
-                      >App design and development</a
-                    >
-                  </h5>
-                  <span class="text-muted font-13">Due in 7 days</span>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Status</span> <br />
-                  <span class="badge badge-success-lighten">Completed</span>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Assigned to</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">Scot M. Smith</h5>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Total time spend</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">78h 05min</h5>
-                </td>
-                <td class="table-action" style="width: 90px">
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-pencil"></i
-                  ></a>
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-delete"></i
-                  ></a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5 class="font-14 my-1">
-                    <a href="javascript:void(0);" class="text-body"
-                      >Poster illustation design</a
-                    >
-                  </h5>
-                  <span class="text-muted font-13">Due in 5 days</span>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Status</span> <br />
-                  <span class="badge badge-warning-lighten">In-progress</span>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Assigned to</span>
+                  <span class="text-muted font-13">Lugar</span>
                   <h5 class="font-14 mt-1 font-weight-normal">
-                    John P. Ritter
+                    El lugar va aquí
                   </h5>
-                </td>
-                <td>
-                  <span class="text-muted font-13">Total time spend</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">26h 58min</h5>
                 </td>
                 <td class="table-action" style="width: 90px">
                   <a href="javascript: void(0);" class="action-icon">
