@@ -76,7 +76,7 @@
     </div>
   </div>
 </div>
-<div class="row w-100">
+<div class="row">
   <div class="col-lg-4">
     <div class="card">
       <div class="card-body">
@@ -116,6 +116,13 @@
         <div class="table-responsive">
           <table class="table table-centered table-nowrap table-hover mb-0">
             <tbody>
+              <tr *ngIf="demonios.length === 0">
+                <td>
+                  <h4 class="font-weight-normal text-center">
+                    No hay demonios registrados (aún).
+                  </h4>
+                </td>
+              </tr>
               <tr *ngFor="let item of demonios.slice(0, 4)">
                 <td>
                   <h5 class="font-14 my-1">
@@ -124,37 +131,45 @@
                     }}</a>
                   </h5>
                   <span class="text-muted font-13">{{
-                    item?.fechaCreacion
+                    item?.fechaCreacion | date: "dd-MMM-yyyy"
                   }}</span>
                 </td>
                 <td>
-                  <span class="text-muted font-13">Estado</span> <br />
                   <span
                     class="badge badge-danger-lighten"
                     *ngIf="!item?.derrotado; else elseblock"
                     >No derrotado</span
                   >
                   <ng-template #elseblock>
-                    <span class="badge badge-success-lighten">Derrotado</span>
+                    <span class="badge badge-success-lighten mb-1"
+                      >Derrotado</span
+                    >
+                    <br />
+                    <span class="text-muted font-13"
+                      >Derrotado el
+                      {{ item?.fechaDerrota | date: "dd-MMM-yyyy" }}</span
+                    >
                   </ng-template>
                 </td>
                 <td>
-                  <span class="text-muted font-13">Parte</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">
-                    {{ item?.parte?.nombre }}
-                  </h5>
+                  <span
+                    class="text-muted font-13"
+                    *ngIf="item.parte; else elseParte"
+                    >{{ item?.parte?.nombre }}</span
+                  >
+                  <ng-template #elseParte>
+                    <span class="text-muted font-13">Ninguna</span>
+                  </ng-template>
+                  <h5 class="font-14 mt-1 font-weight-normal">Parte</h5>
                 </td>
                 <td>
-                  <span class="text-muted font-13">Lugar</span>
-                  <h5 class="font-14 mt-1 font-weight-normal">
-                    {{ item?.lugar?.nombre }}
-                  </h5>
+                  <span class="text-muted font-13">{{
+                    item?.lugar?.nombre
+                  }}</span>
+                  <h5 class="font-14 mt-1 font-weight-normal">Lugar</h5>
                 </td>
                 <td class="table-action" style="width: 90px">
-                  <a href="javascript: void(0);" class="action-icon">
-                    <i class="mdi mdi-pencil"></i
-                  ></a>
-                  <a href="javascript: void(0);" class="action-icon">
+                  <a (click)="delete(item)" class="action-icon">
                     <i class="mdi mdi-delete"></i
                   ></a>
                 </td>
@@ -169,4 +184,40 @@
     <!-- end card -->
   </div>
   <!-- end col-->
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mb-3">Peleas recientes</h4>
+        <div class="table-responsive">
+          <table class="table table-centered table-nowrap table-hover mb-0">
+            <tbody>
+              <tr *ngIf="peleas.length === 0">
+                <td>
+                  <h4 class="font-weight-normal text-center">
+                    No hay peleas registradas (aún).
+                  </h4>
+                </td>
+              </tr>
+              <tr *ngFor="let pelea of peleas.slice(0, 10)">
+                <td>
+                  <span class="text-muted font-13">
+                    {{ pelea.id }}
+                  </span>
+                  <h5 class="font-14 mt-1 font-weight-normal">ID</h5>
+                </td>
+                <td>
+                  <span class="text-muted font-13">
+                    {{ pelea.demonio.nombre }}
+                  </span>
+                  <h5 class="font-14 mt-1 font-weight-normal">Demonio</h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

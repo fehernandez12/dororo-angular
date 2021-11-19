@@ -82,7 +82,12 @@
             <td>{{ demonio.id }}</td>
             <td>{{ demonio.nombre }}</td>
             <td>{{ demonio.lugar.nombre }}</td>
-            <td>{{ demonio.parte.nombre }}</td>
+            <td *ngIf="demonio.parte; else elseParte">
+              {{ demonio.parte?.nombre }}
+            </td>
+            <ng-template #elseParte>
+              <td>Ninguna</td>
+            </ng-template>
             <td>
               <span
                 class="badge badge-success"
@@ -96,7 +101,7 @@
             <td>
               <button
                 class="btn btn-sm btn-outline-danger mr-1"
-                (click)="delete(demonio)"
+                (click)="delete(demonio, true)"
               >
                 <i class="mdi mdi-trash-can-outline"></i>
               </button>

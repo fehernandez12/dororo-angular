@@ -134,18 +134,82 @@ export class DemonioscrudComponent implements OnInit {
               );
             }
           );
-
         }
       }
     );
   }
 
   deleteSelected() {
-
+    Swal.fire(
+      {
+        title: '¿Estás seguro, Hyakkimaru?',
+        text: 'Vas a eliminar todos los registros seleccionados. Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#fa5c7c',
+        cancelButtonColor: '#0acf97',
+        confirmButtonText: 'Sí, estoy seguro.',
+        cancelButtonText: 'Está bien, no lo haré.'
+      }
+    ).then(
+      (result) => {
+        if (result.isConfirmed) {
+          for (const item of this.selected) {
+            this.delete(item, false);
+          }
+        }
+      }
+    );
   }
 
-  delete(demonio: Demonio): void{
-
+  delete(demonio: Demonio, alert?:boolean): void{
+    if (alert) {
+      Swal.fire(
+        {
+          title: '¿Estás seguro, Hyakkimaru?',
+          text: 'Esta acción no se puede deshacer.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#fa5c7c',
+          cancelButtonColor: '#0acf97',
+          confirmButtonText: 'Sí, estoy seguro.',
+          cancelButtonText: 'Está bien, no lo haré.'
+        }
+      ).then(
+        (result) => {
+          if (result.isConfirmed) {
+            this.lugarService.delete(demonio.id!).subscribe(
+              response => {
+                this.demonios = this.demonios.filter(cli => cli != demonio);
+                Swal.fire(
+                  {
+                    title: '¡Genial!',
+                    text: '¡El demonio ha sido eliminado!',
+                    icon: 'success',
+                    confirmButtonText: 'Desaparece de mi vista'
+                  }
+                );
+              }
+            );
+          }
+        }
+      );
+    }
+    else {
+      this.lugarService.delete(demonio.id!).subscribe(
+        response => {
+          this.demonios = this.demonios.filter(cli => cli != demonio);
+          Swal.fire(
+            {
+              title: '¡Genial!',
+              text: '¡Los demonios han sido eliminados!',
+              icon: 'success',
+              confirmButtonText: 'Desaparece de mi vista'
+            }
+          );
+        }
+      );
+    }
   }
 
   update(demonio: Demonio): void{

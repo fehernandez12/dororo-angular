@@ -21,11 +21,9 @@ import { MainComponent } from './components/main/main.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { LugarformComponent } from './components/lugarform/lugarform.component';
 import { ParteformComponent } from './components/parteform/parteform.component';
-import { PeleaformComponent } from './components/peleaform/peleaform.component';
 import { LugarlistComponent } from './components/lugarlist/lugarlist.component';
 import { TableComponent } from './components/table/table.component';
 import { PartelistComponent } from './components/partelist/partelist.component';
-import { PelealistComponent } from './components/pelealist/pelealist.component';
 import { DemonioscrudComponent } from './components/demonioscrud/demonioscrud.component';
 
 const router: Routes = [
@@ -50,11 +48,9 @@ const router: Routes = [
     SidemenuComponent,
     LugarformComponent,
     ParteformComponent,
-    PeleaformComponent,
     LugarlistComponent,
     TableComponent,
     PartelistComponent,
-    PelealistComponent,
     DemonioscrudComponent,
 
   ],

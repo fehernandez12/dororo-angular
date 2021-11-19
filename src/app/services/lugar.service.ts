@@ -8,7 +8,7 @@ import { Lugar } from '../models/Lugar';
   providedIn: 'root'
 })
 export class LugarService {
-  private urlEndPoint = 'http://localhost:8081/api/lugares/';
+  private urlEndPoint = 'https://dororo-api.herokuapp.com/api/lugares/';
   private header = new HttpHeaders(
     {
       'Content-type': 'application/json'
