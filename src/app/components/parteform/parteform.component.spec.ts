@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DemonioslistComponent } from './demonioslist.component';
+import { ParteformComponent } from './parteform.component';
 
-describe('DemonioslistComponent', () => {
-  let component: DemonioslistComponent;
-  let fixture: ComponentFixture<DemonioslistComponent>;
+describe('ParteformComponent', () => {
+  let component: ParteformComponent;
+  let fixture: ComponentFixture<ParteformComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DemonioslistComponent ]
+      declarations: [ ParteformComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemonioslistComponent);
+    fixture = TestBed.createComponent(ParteformComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

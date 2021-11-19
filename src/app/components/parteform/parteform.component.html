@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box">
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item">Inicio</li>
+          <li class="breadcrumb-item">Partes</li>
+          <li class="breadcrumb-item active">Registrar Parte</li>
+        </ol>
+      </div>
+      <h4 class="page-title">Registrar parte nueva</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-10 offset-xl-1">
+    <form>
+      <div class="row">
+        <div class="col-12">
+          <label for="nombre">Nombre de la parte</label>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            class="form-control"
+            [(ngModel)]="parte.nombre"
+            placeholder="Nombre de la parte"
+          />
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-xl-12 mb-3">
+          <button
+            class="btn btn-primary"
+            (click)="create()"
+            *ngIf="!parte.id; else elseBlock"
+            role="button"
+          >
+            Registrar parte
+          </button>
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" (click)="update()">
+              Guardar cambios
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

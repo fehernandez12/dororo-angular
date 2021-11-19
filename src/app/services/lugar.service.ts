@@ -8,7 +8,7 @@ import { Lugar } from '../models/Lugar';
   providedIn: 'root'
 })
 export class LugarService {
-  private urlEndPoint = 'https://dororo-api.herokuapp.com/api/lugares/';
+  private urlEndPoint = 'http://localhost:8081/api/lugares/';
   private header = new HttpHeaders(
     {
       'Content-type': 'application/json'
@@ -28,6 +28,16 @@ export class LugarService {
       this.urlEndPoint,
       lugar,
       { headers: this.header }
+    );
+  }
+
+  update(lugar: Lugar):Observable<Lugar> {
+    return this.http.put<Lugar>(
+      `${this.urlEndPoint}${lugar.id}`,
+      lugar,
+      {
+        headers: this.header
+      }
     );
   }
 

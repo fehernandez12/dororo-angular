@@ -65,6 +65,16 @@ export class DemonioService {
     );
   }
 
+  update(demonio: Demonio): Observable<Demonio>{
+    return this.http.put<Demonio>(
+      `${this.urlEndPoint}${demonio.id}`,
+      demonio,
+      {
+        headers: this.header
+      }
+    );
+  }
+
   derrotar(demonio: Demonio): Observable<Demonio>{
     return this.http.patch<Demonio>(
       `${this.urlEndPoint}${demonio.id}`,

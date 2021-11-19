@@ -6,6 +6,7 @@ import { Lugar } from 'src/app/models/Lugar';
 import { Parte } from 'src/app/models/Parte';
 import { Chart, registerables } from 'chart.js';
 import { LugarService } from 'src/app/services/lugar.service';
+import { ParteService } from 'src/app/services/parte.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +26,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   derrotados: Demonio[];
   invictos: Demonio[];
 
-  constructor(private demonioService: DemonioService, private lugarService:LugarService) {
+  constructor(private demonioService: DemonioService, private lugarService: LugarService,
+    private parteService:ParteService) {
     Chart.register(...registerables);
     this.demonios = [];
     this.peleas = [];
@@ -72,6 +74,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     );
     this.lugarService.getLugares().subscribe(
       lugares => this.lugares = lugares
+    );
+    this.parteService.getPartes().subscribe(
+      partes => this.partes = partes
     );
   }
 

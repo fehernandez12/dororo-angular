@@ -67,7 +67,7 @@
                 <h3>
                   <span>{{ partes.length }}</span>
                 </h3>
-                <p class="text-muted font-15 mb-0">Partes</p>
+                <p class="text-muted font-15 mb-0">Partes registradas</p>
               </div>
             </div>
           </div>
@@ -120,18 +120,18 @@
                 <td>
                   <h5 class="font-14 my-1">
                     <a href="javascript:void(0);" class="text-body">{{
-                      item.nombre
+                      item?.nombre
                     }}</a>
                   </h5>
                   <span class="text-muted font-13">{{
-                    item.fechaCreacion
+                    item?.fechaCreacion
                   }}</span>
                 </td>
                 <td>
                   <span class="text-muted font-13">Estado</span> <br />
                   <span
                     class="badge badge-danger-lighten"
-                    *ngIf="!item.derrotado; else elseblock"
+                    *ngIf="!item?.derrotado; else elseblock"
                     >No derrotado</span
                   >
                   <ng-template #elseblock>
@@ -141,13 +141,13 @@
                 <td>
                   <span class="text-muted font-13">Parte</span>
                   <h5 class="font-14 mt-1 font-weight-normal">
-                    La parte va aquí
+                    {{ item?.parte?.nombre }}
                   </h5>
                 </td>
                 <td>
                   <span class="text-muted font-13">Lugar</span>
                   <h5 class="font-14 mt-1 font-weight-normal">
-                    El lugar va aquí
+                    {{ item?.lugar?.nombre }}
                   </h5>
                 </td>
                 <td class="table-action" style="width: 90px">

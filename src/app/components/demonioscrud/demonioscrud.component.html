@@ -1,0 +1,191 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box">
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item">Inicio</li>
+          <li class="breadcrumb-item active">Demonios</li>
+        </ol>
+      </div>
+      <h4 class="page-title">Gestionar Demonios</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <button
+            label="Nuevo demonio"
+            icon="pi pi-plus"
+            class="btn btn-primary mr-2"
+            (click)="openNew()"
+          >
+            Nuevo demonio
+          </button>
+          <button
+            label="Eliminar"
+            icon="pi pi-trash"
+            class="btn btn-danger"
+            (click)="deleteSelected()"
+            [disabled]="!selected || !selected.length"
+          >
+            Eliminar seleccionados
+          </button>
+        </ng-template>
+      </p-toolbar>
+      <p-table
+        #dt
+        [columns]="cols"
+        [value]="demonios"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['nombre', 'parte.nombre', 'lugar.nombre']"
+        responsiveLayout="scroll"
+        [(selection)]="selected"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} demonios."
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex" style="text-align: right">
+            <span class="p-input-icon-left p-ml-auto">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                placeholder="Buscar..."
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th *ngFor="let col of columns" pSortableColumn="{{ col.field }}">
+              {{ col.header }}
+              <p-sortIcon field="{{ col.field }}"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-demonio>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="demonio"></p-tableCheckbox>
+            </td>
+            <td>{{ demonio.id }}</td>
+            <td>{{ demonio.nombre }}</td>
+            <td>{{ demonio.lugar.nombre }}</td>
+            <td>{{ demonio.parte.nombre }}</td>
+            <td>
+              <span
+                class="badge badge-success"
+                *ngIf="demonio.derrotado; else elseBadge"
+                >Derrotado</span
+              >
+              <ng-template #elseBadge>
+                <span class="badge badge-danger">No derrotado</span>
+              </ng-template>
+            </td>
+            <td>
+              <button
+                class="btn btn-sm btn-outline-danger mr-1"
+                (click)="delete(demonio)"
+              >
+                <i class="mdi mdi-trash-can-outline"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-outline-info mr-1"
+                (click)="update(demonio)"
+              >
+                <i class="mdi mdi-pencil-outline"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-outline-success"
+                (click)="derrotar(demonio)"
+              >
+                <i class="mdi mdi-sword-cross"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            En total hay {{ demonios ? demonios.length : 0 }} demonios.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<p-dialog
+  [(visible)]="demonDialog"
+  [style]="{ width: '800px' }"
+  header="Detalles del demonio"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <form>
+      <div class="row mb-2">
+        <div class="col-12">
+          <label for="nombre">Nombre del demonio</label>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            class="form-control"
+            [(ngModel)]="demonio.nombre"
+            placeholder="Nombre del demonio"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mb-2">
+          <label for="lugar">Lugar en el que se encuentra</label>
+          <select
+            name="lugar"
+            id="lugar"
+            class="form-control"
+            [(ngModel)]="demonio.lugar"
+          >
+            <option value="" selected>Selecciona un lugar...</option>
+            <option *ngFor="let lugar of lugares" [ngValue]="lugar">
+              {{ lugar.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mb-2">
+          <label for="parte">Parte que posee</label>
+          <select
+            name="parte"
+            id="parte"
+            class="form-control"
+            [(ngModel)]="demonio.parte"
+          >
+            <option value="" selected>Selecciona una parte...</option>
+            <option *ngFor="let parte of partes" [ngValue]="parte">
+              {{ parte.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-primary" (click)="save()">
+            Guardar demonio
+          </button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</p-dialog>

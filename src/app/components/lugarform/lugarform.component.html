@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box">
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item">Inicio</li>
+          <li class="breadcrumb-item">Lugares</li>
+          <li
+            class="breadcrumb-item active"
+            *ngIf="!lugar.id; else elseBcBlock"
+          >
+            Registrar Lugar
+          </li>
+          <ng-template #elseBcBlock>
+            <li class="breadcrumb-item active">Editar Lugar</li>
+          </ng-template>
+        </ol>
+      </div>
+      <h4 class="page-title" *ngIf="!lugar.id; else elseh4Block">
+        Registrar lugar nuevo
+      </h4>
+      <ng-template #elseh4Block>
+        <h4 class="page-title">Editar {{ lugar.nombre }}</h4>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-10 offset-xl-1">
+    <form>
+      <div class="row">
+        <div class="col-12">
+          <label for="nombre">Nombre del lugar</label>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            class="form-control"
+            [(ngModel)]="lugar.nombre"
+            placeholder="Nombre del lugar"
+          />
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-12 mb-3" *ngIf="!lugar.id; else elseBlock">
+          <button class="btn btn-primary mr-3" (click)="create()" role="button">
+            Registrar lugar
+          </button>
+          <button
+            class="btn btn-secondary"
+            (click)="createAnother()"
+            role="button"
+          >
+            Registrar y agregar otro
+          </button>
+        </div>
+        <ng-template #elseBlock>
+          <div class="col-12 mb-3">
+            <button class="btn btn-primary" (click)="update()">
+              Guardar cambios
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+</div>

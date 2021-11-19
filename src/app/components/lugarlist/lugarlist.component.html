@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box">
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item">Inicio</li>
+          <li class="breadcrumb-item active">Lugares</li>
+        </ol>
+      </div>
+      <h4 class="page-title">Lugares</h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button
+      class="btn btn-sm btn-primary mb-1"
+      [routerLink]="['/lugares/crear']"
+    >
+      Registrar nuevo lugar
+    </button>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="table-responsive">
+        <div class="p-mb-3">
+          <p-button
+            type="button"
+            icon="pi pi-chevron-left"
+            (click)="prev()"
+            [disabled]="isFirstPage()"
+            styleClass="p-button-text"
+          ></p-button>
+          <p-button
+            type="button"
+            icon="pi pi-refresh"
+            (click)="reset()"
+            styleClass="p-button-text"
+          ></p-button>
+          <p-button
+            type="button"
+            icon="pi pi-chevron-right"
+            (click)="next()"
+            [disabled]="isLastPage()"
+            styleClass="p-button-text"
+          ></p-button>
+        </div>
+        <p-table
+          #dt1
+          [columns]="cols"
+          [value]="tableData"
+          [paginator]="true"
+          [rows]="rows"
+          [showCurrentPageReport]="true"
+          [(first)]="first"
+          responsiveLayout="scroll"
+          currentPageReportTemplate="Mostrando los primeros {last} lugares de {totalRecords}"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [globalFilterFields]="['id', 'nombre']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex" style="text-align: right">
+              <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="
+                    dt1.filterGlobal($any($event.target).value, 'contains')
+                  "
+                  placeholder="Buscar..."
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" pSortableColumn="{{ col.field }}">
+                {{ col.header }}
+                <p-sortIcon field="{{ col.field }}"></p-sortIcon>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-lugar let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{ lugar[col.field] }}
+              </td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-danger mr-3"
+                  (click)="delete(lugar)"
+                >
+                  <i class="mdi mdi-trash-can-outline"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-info"
+                  [routerLink]="['/lugares/editar', lugar.id]"
+                >
+                  <i class="mdi mdi-pencil-outline"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
