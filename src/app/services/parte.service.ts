@@ -8,7 +8,7 @@ import { Parte } from '../models/Parte';
   providedIn: 'root'
 })
 export class ParteService {
-  private urlEndPoint = 'https://dororo-api.herokuapp.com/api/partes/';
+  private urlEndPoint = 'http://localhost:8081/api/partes/';
   private header = new HttpHeaders(
     {
       'Content-type': 'application/json'

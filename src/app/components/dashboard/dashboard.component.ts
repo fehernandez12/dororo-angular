@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     );
   }
 
-  generateChart(derrotados:number, invictos:number) {
+  generateChart(d:number, i:number) {
     this.canvas = document.getElementById('demonsChart');
     this.ctx = this.canvas.getContext('2d');
     this.chart = new Chart(this.ctx, {
@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         labels: ['Derrotados', 'No derrotados'],
         datasets: [
           {
-            data: [derrotados, invictos],
+            data: [d, i],
             backgroundColor: ['#10c469', '#ff5b5b'],
             borderWidth: 0
           }
