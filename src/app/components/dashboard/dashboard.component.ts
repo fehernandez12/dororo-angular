@@ -16,7 +16,7 @@ import { PeleaService } from 'src/app/services/pelea.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-  canvas: any;
+  canvas?: any;
   ctx: any;
   chart: any;
   porcentajeD: number;
