@@ -10,7 +10,7 @@ import { Pelea } from '../models/Pelea';
 })
 export class PeleaService {
 
-  private urlEndPoint = 'http://localhost:8081/api/peleas/';
+  private urlEndPoint = 'https://dororo-api.herokuapp.com/api/peleas/';
   private header = new HttpHeaders(
     {
       'Content-type': 'application/json'
