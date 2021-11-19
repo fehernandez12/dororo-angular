@@ -25,6 +25,7 @@ import { LugarlistComponent } from './components/lugarlist/lugarlist.component';
 import { TableComponent } from './components/table/table.component';
 import { PartelistComponent } from './components/partelist/partelist.component';
 import { DemonioscrudComponent } from './components/demonioscrud/demonioscrud.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const router: Routes = [
   { path: '', component: DashboardComponent },
@@ -34,8 +35,8 @@ const router: Routes = [
   { path: 'partes', component: PartelistComponent },
   { path: 'partes/crear', component: ParteformComponent },
   { path: 'partes/editar/:id', component: ParteformComponent },
-  { path: 'demonios', component: DemonioscrudComponent }
-
+  { path: 'demonios', component: DemonioscrudComponent },
+  { path: '**', component: NotFoundComponent }
 ]
 
 @NgModule({
@@ -52,7 +53,7 @@ const router: Routes = [
     TableComponent,
     PartelistComponent,
     DemonioscrudComponent,
-
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
