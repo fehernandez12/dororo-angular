@@ -3,8 +3,11 @@
 body {
   font-family: "Nunito", sans-serif;
 }
-.p-component {
-  font-family: "Nunito", sans-serif!important;
-  font-size: 1rem;
-  font-weight: normal;
+:host {
+  ::ng-deep .p-component {
+    font-family: "Nunito", sans-serif!important;
+    font-size: 1rem;
+    font-weight: normal;
+  }
 }
+
