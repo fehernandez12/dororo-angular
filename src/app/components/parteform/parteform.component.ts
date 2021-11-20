@@ -49,6 +49,23 @@ export class ParteformComponent implements OnInit {
     );
   }
 
+  createAnother(): void{
+    this.parteService.create(this.parte).subscribe(
+      response => {
+        this.parte = new Parte(0, '');
+        this.router.navigate(['/partes/crear']);
+        Swal.fire(
+          {
+            title: '¡Genial!',
+            text: '¡Nuevo lugar registrado!',
+            icon: 'success',
+            confirmButtonText: 'Desaparece de mi vista'
+          }
+        );
+      }
+    );
+  }
+
   update(): void {
     this.parteService.update(this.parte).subscribe(
       response => {
