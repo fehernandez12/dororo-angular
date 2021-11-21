@@ -13,43 +13,115 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <div class="table-responsive">
-      <table class="table table-hover table-nowrap w-100">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre de la parte</th>
-            <th>Demonio que la posee</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let parte of tableData">
-            <td>{{ parte.id }}</td>
-            <td>{{ parte.nombre }}</td>
-            <td *ngIf="parte.demonio; else elseBlock">
-              {{ parte.demonio?.nombre }}
-            </td>
-            <ng-template #elseBlock>
-              <td>Ya la recuperaste</td>
-            </ng-template>
-            <td>
-              <button
-                class="btn btn-sm btn-outline-danger mr-3"
-                (click)="delete(parte)"
-              >
-                <i class="mdi mdi-trash-can-outline"></i>
-              </button>
-              <button
-                class="btn btn-sm btn-outline-info"
-                [routerLink]="['/partes/editar', parte.id]"
-              >
-                <i class="mdi mdi-pencil-outline"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <button
+      class="btn btn-sm btn-primary mb-1"
+      [routerLink]="['/partes/crear']"
+    >
+      Registrar nueva parte
+    </button>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="table-responsive">
+        <div class="p-mb-3">
+          <p-button
+            type="button"
+            icon="pi pi-chevron-left"
+            (click)="prev()"
+            [disabled]="isFirstPage()"
+            styleClass="p-button-text"
+          ></p-button>
+          <p-button
+            type="button"
+            icon="pi pi-refresh"
+            (click)="reset()"
+            styleClass="p-button-text"
+          ></p-button>
+          <p-button
+            type="button"
+            icon="pi pi-chevron-right"
+            (click)="next()"
+            [disabled]="isLastPage()"
+            styleClass="p-button-text"
+          ></p-button>
+        </div>
+        <p-table
+          #dt1
+          [columns]="cols"
+          [value]="tableData"
+          [paginator]="true"
+          [rows]="rows"
+          [showCurrentPageReport]="true"
+          [(first)]="first"
+          responsiveLayout="scroll"
+          currentPageReportTemplate="Mostrando las primeras {last} partes de {totalRecords}"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [globalFilterFields]="['id', 'nombre', 'demonio']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex" style="text-align: right">
+              <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="
+                    dt1.filterGlobal($any($event.target).value, 'contains')
+                  "
+                  placeholder="Buscar..."
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" pSortableColumn="{{ col.field }}">
+                {{ col.header }}
+                <p-sortIcon field="{{ col.field }}"></p-sortIcon>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-parte let-columns="columns">
+            <tr>
+              <td>
+                {{ parte.id }}
+              </td>
+              <td>
+                {{ parte.nombre }}
+              </td>
+              <td>
+                <span
+                  *ngIf="parte.demonio?.id; else elseDemonio"
+                  class="text-danger"
+                >
+                  {{ parte.demonio?.nombre }}
+                </span>
+                <ng-template #elseDemonio>
+                  <span class="text-success">Ya la recuperaste</span>
+                </ng-template>
+              </td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-danger mr-3"
+                  (click)="delete(parte)"
+                >
+                  <i class="mdi mdi-trash-can-outline"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-info"
+                  [routerLink]="['/partes/editar', parte.id]"
+                >
+                  <i class="mdi mdi-pencil-outline"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
   </div>
 </div>

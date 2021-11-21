@@ -11,8 +11,12 @@ import { Parte } from 'src/app/models/Parte';
 })
 export class PartelistComponent implements OnInit {
   tableData: Parte[];
+  cols: any[]
+  first = 0;
+  rows = 10;
   constructor(private parteService: ParteService) {
     this.tableData = [];
+    this.cols = [];
   }
 
   ngOnInit(): void {
@@ -21,6 +25,40 @@ export class PartelistComponent implements OnInit {
         this.tableData = tableData
       }
     );
+    this.cols = [
+      {
+        field: 'id',
+        header: 'ID'
+      },
+      {
+        field: 'nombre',
+        header: 'Parte'
+      },
+      {
+        field: 'demonio',
+        header: 'Demonio que la posee'
+      }
+    ];
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  isLastPage(): boolean{
+    return this.tableData ? this.first === (this.tableData.length - this.rows) : true;
+  }
+
+  isFirstPage(): boolean{
+    return this.tableData ? this.first === 0 : true;
   }
 
   delete(parte: Parte): void{

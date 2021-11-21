@@ -57,7 +57,7 @@ export class ParteformComponent implements OnInit {
         Swal.fire(
           {
             title: '¡Genial!',
-            text: '¡Nuevo lugar registrado!',
+            text: '¡Nueva parte registrada!',
             icon: 'success',
             confirmButtonText: 'Desaparece de mi vista'
           }
