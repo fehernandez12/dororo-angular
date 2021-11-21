@@ -148,6 +148,7 @@
             class="form-control"
             [(ngModel)]="demonio.nombre"
             placeholder="Nombre del demonio"
+            required
           />
         </div>
       </div>
@@ -159,6 +160,7 @@
             id="lugar"
             class="form-control"
             [(ngModel)]="demonio.lugar"
+            required
           >
             <option value="" selected>Selecciona un lugar...</option>
             <option *ngFor="let lugar of lugares" [ngValue]="lugar">
@@ -175,6 +177,7 @@
             id="parte"
             class="form-control"
             [(ngModel)]="demonio.parte"
+            required
           >
             <option value="" selected>Selecciona una parte...</option>
             <option *ngFor="let parte of partes" [ngValue]="parte">
